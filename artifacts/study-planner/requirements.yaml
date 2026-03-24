@@ -1,0 +1,16 @@
+packages:
+  "framer-motion": "For page transitions and smooth UI micro-interactions"
+  "recharts": "For rendering progress charts and data visualization"
+  "date-fns": "For calendar grid generation and date formatting"
+  "clsx": "Utility for constructing className strings conditionally"
+  "tailwind-merge": "Utility for merging tailwind classes without style conflicts"
+
+images:
+  - path: "artifacts/study-planner/public/images/login-bg.png"
+    description: "Minimalist abstract 3D dark gray and silver geometric shapes, soft studio lighting, professional corporate startup vibe, highly detailed"
+    aspect_ratio: "16:9"
+
+notes:
+  - useGeneratePlan hook imported from @workspace/api-client-react
+  - LocalStorage is used for task state and auth state to provide instant feedback
+  - Dark mode preference stored in localStorage and toggled via .dark class on html

@@ -14,3 +14,15 @@ import * as zod from "zod";
 export const HealthCheckResponse = zod.object({
   status: zod.string(),
 });
+
+/**
+ * Generates a study plan using OpenAI based on the user's goal
+ * @summary Generate AI study plan
+ */
+export const GeneratePlanBody = zod.object({
+  goal: zod.string().describe('The learning goal (e.g., \"Data Analyst\")'),
+});
+
+export const GeneratePlanResponse = zod.object({
+  tasks: zod.array(zod.string()).describe("Array of study tasks"),
+});

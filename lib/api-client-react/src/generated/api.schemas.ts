@@ -8,3 +8,17 @@
 export interface HealthStatus {
   status: string;
 }
+
+export interface GeneratePlanRequest {
+  /** The learning goal (e.g., "Data Analyst") */
+  goal: string;
+}
+
+export interface GeneratePlanResponse {
+  /** Array of study tasks */
+  tasks: string[];
+}
+
+export interface ErrorResponse {
+  error: string;
+}

@@ -1,6 +1,5 @@
 openapi: 3.1.0
 info:
-  # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
   description: API specification
@@ -10,6 +9,8 @@ servers:
 tags:
   - name: health
     description: Health operations
+  - name: study
+    description: Study planner operations
 paths:
   /healthz:
     get:
@@ -24,6 +25,37 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+  /generate-plan:
+    post:
+      operationId: generatePlan
+      tags: [study]
+      summary: Generate AI study plan
+      description: Generates a study plan using OpenAI based on the user's goal
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GeneratePlanRequest"
+      responses:
+        "200":
+          description: Generated study plan
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GeneratePlanResponse"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
 components:
   schemas:
     HealthStatus:
@@ -33,4 +65,28 @@ components:
           type: string
       required:
         - status
-
+    GeneratePlanRequest:
+      type: object
+      properties:
+        goal:
+          type: string
+          description: The learning goal (e.g., "Data Analyst")
+      required:
+        - goal
+    GeneratePlanResponse:
+      type: object
+      properties:
+        tasks:
+          type: array
+          items:
+            type: string
+          description: Array of study tasks
+      required:
+        - tasks
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+      required:
+        - error
